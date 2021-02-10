@@ -1,0 +1,27 @@
+{
+  "name": "fixTextTypo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node dist/app.js",
+    "dev": "nodemon --config nodemon.json src/app.ts",
+    "dev:debug": "nodemon --config nodemon.json --inspect-brk src/app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^14.14.25",
+    "@typescript-eslint/eslint-plugin": "^4.15.0",
+    "@typescript-eslint/parser": "^4.15.0",
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.4"
+  }
+}
