@@ -2,11 +2,11 @@
   "name": "fixTextTypo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "bin/www.ts",
   "scripts": {
-    "start": "tsc && node dist/app.js",
-    "dev": "nodemon --config nodemon.json src/app.ts",
-    "dev:debug": "nodemon --config nodemon.json --inspect-brk src/app.ts",
+    "start": "tsc && node dist/bin/www",
+    "dev": "nodemon --config nodemon.json bin/www",
+    "dev:debug": "nodemon --config nodemon.json --inspect-brk bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
