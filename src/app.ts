@@ -2,6 +2,8 @@ import { IncomingMessage, ServerResponse } from 'http';
 import { URL } from 'url';
 import apiRouter from './api';
 
+// TODO: errorHandler
+
 const requestListener = async (req: IncomingMessage, res: ServerResponse): Promise<void> => {
   const { pathname } = new URL(req.url || '', `http://${req.headers.host}`);
   const urlPath = Object.keys(apiRouter).find((route) => route === pathname);

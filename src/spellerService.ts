@@ -7,10 +7,10 @@ async function checkText(
   options = undefined,
 ): Promise<Readable> {
   return new Promise<Readable>((resolve, reject) => {
-    const body = Buffer.concat(data).toString();
+    const checkedText = Buffer.concat(data).toString();
 
-    const spellerBody = querystring.stringify({ text: body, options });
-    // TODO: check body.length < 10000
+    const spellerRequestBody = querystring.stringify({ text: checkedText, options });
+    // TODO: check checkedText.length < 10000
     const connectionOptions = {
       hostname: 'speller.yandex.net',
       port: 443,
@@ -18,7 +18,7 @@ async function checkText(
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': Buffer.byteLength(spellerBody),
+        'Content-Length': Buffer.byteLength(spellerRequestBody),
       },
     };
 
@@ -29,7 +29,7 @@ async function checkText(
       resSpeller.on('data', (d) => {
         result += d;
       });
-      let resultString = body;
+      let resultString = checkedText;
       resSpeller.on('end', () => {
         // TODO: строгая типизация
         const parsed: any[] = JSON.parse(result);
@@ -50,7 +50,7 @@ async function checkText(
       reject(error);
     });
 
-    reqSpeller.write(spellerBody);
+    reqSpeller.write(spellerRequestBody);
     reqSpeller.end();
   });
 }

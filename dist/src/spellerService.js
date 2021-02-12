@@ -8,9 +8,9 @@ const querystring_1 = __importDefault(require("querystring"));
 const stream_1 = require("stream");
 async function checkText(data, options = undefined) {
     return new Promise((resolve, reject) => {
-        const body = Buffer.concat(data).toString();
-        const spellerBody = querystring_1.default.stringify({ text: body, options });
-        // TODO: check body.length < 10000
+        const checkedText = Buffer.concat(data).toString();
+        const spellerRequestBody = querystring_1.default.stringify({ text: checkedText, options });
+        // TODO: check checkedText.length < 10000
         const connectionOptions = {
             hostname: 'speller.yandex.net',
             port: 443,
@@ -18,7 +18,7 @@ async function checkText(data, options = undefined) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Content-Length': Buffer.byteLength(spellerBody),
+                'Content-Length': Buffer.byteLength(spellerRequestBody),
             },
         };
         const reqSpeller = https_1.default.request(connectionOptions, (resSpeller) => {
@@ -27,7 +27,7 @@ async function checkText(data, options = undefined) {
             resSpeller.on('data', (d) => {
                 result += d;
             });
-            let resultString = body;
+            let resultString = checkedText;
             resSpeller.on('end', () => {
                 // TODO: строгая типизация
                 const parsed = JSON.parse(result);
@@ -41,7 +41,7 @@ async function checkText(data, options = undefined) {
             console.error(error);
             reject(error);
         });
-        reqSpeller.write(spellerBody);
+        reqSpeller.write(spellerRequestBody);
         reqSpeller.end();
     });
 }

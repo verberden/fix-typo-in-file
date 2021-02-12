@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const url_1 = require("url");
 const api_1 = __importDefault(require("./api"));
+// TODO: errorHandler
 const requestListener = async (req, res) => {
     const { pathname } = new url_1.URL(req.url || '', `http://${req.headers.host}`);
     const urlPath = Object.keys(api_1.default).find((route) => route === pathname);
